@@ -10,6 +10,8 @@
 <body>
     @include("dashboard.navbar")
 @include("dashboard.tem&hum")
+@include('arduino.auto')
+
 <br>
 <br>
 

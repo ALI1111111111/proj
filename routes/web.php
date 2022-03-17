@@ -22,3 +22,9 @@ Route::get('/', function () {
 });
 
 Route::get('/water/value','WaterController@show');
+Route::view('/auto','arduino/auto');
+
+Route::get('/ard/val','ArdController@index');
+Route::post('/ard/btn','ArdController@store');
+
+Route::get('/ard/{id}','ArdController@show');

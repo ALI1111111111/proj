@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\water;
+use Response;
+use App\ard;
 use Illuminate\Http\Request;
 
-class WaterController extends Controller
+class ArdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,11 @@ class WaterController extends Controller
     public function index()
     {
         //
+
+
+        $val = ard::where('id',1)->get();
+        // $val = ard::all();
+        return view('arduino.dashboard',['values'=> $val]);
     }
 
     /**
@@ -36,27 +41,38 @@ class WaterController extends Controller
     public function store(Request $request)
     {
         //
-    }
+
+
+        $data = ard::find(1);
+        // $data = new ard();
+        $data->value = $request->On;
+        $data->save();
+
+// return redirect('/ard/val');
+        }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\water  $water
+     * @param  \App\Models\ard  $ard
      * @return \Illuminate\Http\Response
      */
-    public function show(water $water)
+    public function show(ard $ard,$id)
     {
         //
-        return 90;
+        $val = ard::where('id',$id)->select('value')->get();
+        // $val =ard::all();
+        // return $val;
+        return view('arduino.show',['values'=> $val]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\water  $water
+     * @param  \App\Models\ard  $ard
      * @return \Illuminate\Http\Response
      */
-    public function edit(water $water)
+    public function edit(ard $ard)
     {
         //
     }
@@ -65,21 +81,25 @@ class WaterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\water  $water
+     * @param  \App\Models\ard  $ard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, water $water)
+    public function update(Request $request, ard $ard,$id)
     {
         //
+               $val = ard::where('id',$id)->get();
+
+        // return $val->value;
+        return view('arduino.show',['values'=> $val]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\water  $water
+     * @param  \App\Models\ard  $ard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(water $water)
+    public function destroy(ard $ard)
     {
         //
     }

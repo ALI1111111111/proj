@@ -36,7 +36,7 @@ jQuery.extend(jQuery.easing, {
 });
 
 $(document).ready(function(){
-    var perc = 53;
+    var perc = 30;
     var s = document.styleSheets[0];
     // Define a size array, this will be used to vary bubble sizes
     var sArray = [];
@@ -54,12 +54,7 @@ $(document).ready(function(){
     }, 500);
     // get value for tank
 
-      setInterval(function(){
-        $.get("http://192.168.10.3/proj/public/water/value", function(data, status){
-           console.log(data);
 
-        });
-    }, 7000);
     function updateBattery(perc, s){
         if(perc === 100){
             sArray = [];
@@ -109,7 +104,14 @@ $(document).ready(function(){
         }
     }, 350);
 
-
+   function getval(){
+            $.get("http://192.168.10.4/proj/public/water/value", function(data, status){
+             console.log(data);
+updateBattery(data, s);
+$('.percentage').text(data);
+            });
+          }
+          setInterval(getval,7000);
     $('.slider input').on('input', function(){
         $(this).stop(); // Terminate any running animation
         var original = this.value;
