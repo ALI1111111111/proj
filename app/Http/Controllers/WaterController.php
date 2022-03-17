@@ -15,6 +15,7 @@ class WaterController extends Controller
     public function index()
     {
         //
+        return view('waterlevel.store');
     }
 
     /**
@@ -36,6 +37,13 @@ class WaterController extends Controller
     public function store(Request $request)
     {
         //
+        // return $request->distance;
+        $data = water::find(1);
+        $data->status = 'Online';
+        $data->distance = $request->distance;
+        $data->save();
+        return 'success';
+        // return redirect('water/add');
     }
 
     /**
@@ -44,10 +52,10 @@ class WaterController extends Controller
      * @param  \App\water  $water
      * @return \Illuminate\Http\Response
      */
-    public function show(water $water)
+    public function show(water $water,$data)
     {
         //
-        return 90;
+        return $data;
     }
 
     /**
